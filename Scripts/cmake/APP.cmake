@@ -37,7 +37,7 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
   set_property(SOURCE ${_src} PROPERTY LANGUAGE "OBJCXX")
   iplug_target_add(iPlug2_APP INTERFACE
     DEFINE "__MACOSX_CORE__" "SWELL_COMPILED"
-    LINK "-framework AppKit" "-framework CoreMIDI" "-framework CoreAudio"
+    LINK "-framework Carbon" "-framework AppKit" "-framework CoreMIDI" "-framework CoreAudio"
     SOURCE 
       "${WDL_DIR}/swell/swell-appstub.mm"
       "${WDL_DIR}/swell/swellappmain.mm"
