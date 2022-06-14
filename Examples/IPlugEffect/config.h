@@ -8,6 +8,7 @@
 #define PLUG_EMAIL_STR "spam@me.com"
 #define PLUG_COPYRIGHT_STR "Copyright 2020 Acme Inc"
 #define PLUG_CLASS_NAME IPlugEffect
+#define NO_IGRAPHICS
 
 #define BUNDLE_NAME "IPlugEffect"
 #define BUNDLE_MFR "AcmeInc"
@@ -36,13 +37,6 @@
 #define AUV2_VIEW_CLASS IPlugEffect_View
 #define AUV2_VIEW_CLASS_STR "IPlugEffect_View"
 
-#define AAX_TYPE_IDS 'IEF1', 'IEF2'
-#define AAX_TYPE_IDS_AUDIOSUITE 'IEA1', 'IEA2'
-#define AAX_PLUG_MFR_STR "Acme"
-#define AAX_PLUG_NAME_STR "IPlugEffect\nIPEF"
-#define AAX_PLUG_CATEGORY_STR "Effect"
-#define AAX_DOES_AUDIOSUITE 1
-
 #define VST3_SUBCATEGORY "Fx"
 
 #define APP_NUM_CHANNELS 2
@@ -51,4 +45,4 @@
 #define APP_COPY_AUV3 0
 #define APP_SIGNAL_VECTOR_SIZE 64
 
-#define ROBOTO_FN "Roboto-Regular.ttf"
+#define MAC_MINIMUM_SYSTEM_VERSION "10.15"

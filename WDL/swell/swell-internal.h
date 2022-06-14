@@ -38,6 +38,10 @@ public:
 struct HTREEITEM__;
 
 #ifdef SWELL_TARGET_OSX
+// I'd rather not modify WDL, but if I don't do this, CMake or clang or whoever might throw a fit and shout at me and this fixes it so who cares
+#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#import <AppKit/AppKit.h>
 
 #if 0
   // at some point we should enable this and use it in most SWELL APIs that call Cocoa code...

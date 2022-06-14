@@ -21,11 +21,6 @@
 
 using namespace iplug;
 
-#if !defined NO_IGRAPHICS
-#include "IGraphics.h"
-using namespace igraphics;
-#endif
-
 /* Workaround for SWELL on Linux (may be on Mac as well, not checked).
  * CB_RESETCONTENT is not updating ComboBox. In case there was items
  * but it should be cleared now, last selected item stay visible.

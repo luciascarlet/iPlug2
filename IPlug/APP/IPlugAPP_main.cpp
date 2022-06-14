@@ -307,7 +307,7 @@ INT_PTR SWELLAppMain(int msg, INT_PTR parm1, INT_PTR parm2)
 #elif defined(OS_LINUX)
 
 #include "swell.h"
-#include "swell-internal.h" // for HWND structure
+#include "swwell-internal.h" // for HWND structure
 
 HWND gHWND = NULL;
 

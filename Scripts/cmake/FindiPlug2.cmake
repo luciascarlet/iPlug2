@@ -227,10 +227,8 @@ endfunction()
 ############################
 
 set(IPLUG_SRC ${IPLUG2_DIR}/IPlug)
-set(IGRAPHICS_SRC ${IPLUG2_DIR}/IGraphics)
 set(WDL_DIR ${IPLUG2_DIR}/WDL)
 set(IPLUG_DEPS ${IPLUG2_DIR}/Dependencies/IPlug)
-set(IGRAPHICS_DEPS ${IPLUG2_DIR}/Dependencies/IGraphics)
 set(BUILD_DEPS ${IPLUG2_DIR}/Dependencies/Build)
 
 # Core iPlug2 interface. All targets MUST link to this.
@@ -275,7 +273,6 @@ set(_src
 
 # Platform Settings
 if (CMAKE_SYSTEM_NAME MATCHES "Windows")
-  list(APPEND _src ${IGRAPHICS_SRC}/Platforms/IGraphicsWin.cpp)
   target_link_libraries(iPlug2_Core INTERFACE "Shlwapi.lib" "comctl32.lib" "wininet.lib")
   
   # postbuild-win.bat is used by VST2/VST3/AAX on Windows, so we just always configure it on Windows
@@ -294,9 +291,6 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
   list(APPEND _src 
     ${IPLUG_SRC}/IPlugPaths.mm
-    ${IGRAPHICS_SRC}/Platforms/IGraphicsMac.mm
-    ${IGRAPHICS_SRC}/Platforms/IGraphicsMac_view.mm
-    ${IGRAPHICS_SRC}/Platforms/IGraphicsCoreText.mm
   )
   list(APPEND _inc ${WDL_DIR}/swell)
   list(APPEND _lib
@@ -326,13 +320,6 @@ endif()
 
 source_group(TREE ${IPLUG2_DIR} PREFIX "IPlug" FILES ${_src})
 iplug_target_add(iPlug2_Core INTERFACE DEFINE ${_def} INCLUDE ${_inc} SOURCE ${_src} OPTION ${_opts} LINK ${_lib})
-
-#############
-# IGraphics #
-#############
-
-# We include this first because APP requires LICE.
-include("${IPLUG2_CMAKE_DIR}/IGraphics.cmake")
 
 ####################
 # Reaper Extension #
@@ -415,12 +402,7 @@ function(iplug_configure_target target target_type)
 
   endif()
   
-  if ("${target_type}" STREQUAL "aax")
-    if (NOT TARGET iPlug2_AAX)
-      include("${IPLUG2_CMAKE_DIR}/AAX.cmake")
-    endif()
-    iplug_configure_aax(${target})
-  elseif ("${target_type}" STREQUAL "app")
+if ("${target_type}" STREQUAL "app")
     if (NOT TARGET iPlug2_APP)
       include("${IPLUG2_CMAKE_DIR}/APP.cmake")
     endif()
@@ -452,17 +434,7 @@ function(iplug_configure_target target target_type)
       include("${IPLUG2_CMAKE_DIR}/VST3.cmake")
     endif()
     iplug_configure_vst3(${target})
-  elseif ("${target_type}" STREQUAL "web")
-    if (NOT TARGET iPlug2_WEB)
-      include("${IPLUG2_CMAKE_DIR}/WEB.cmake")
-    endif()
-    iplug_configure_web(${target})
-  elseif ("${target_type}" STREQUAL "wam")
-    if (NOT TARGET iPlug2_WAM)
-      include("${IPLUG2_CMAKE_DIR}/WEB.cmake")
-    endif()
-    iplug_configure_wam(${target})
   else()
-    message("Unknown target type \'${target_type}\' for target '${target}'" FATAL_ERROR)
+    message("Unknown target type '${target_type}' for target '${target}'" FATAL_ERROR)
   endif()
 endfunction()

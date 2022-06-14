@@ -6,7 +6,7 @@ set(VST2_SDK "${IPLUG2_DIR}/Dependencies/IPlug/VST2_SDK" CACHE PATH "VST2 SDK di
 if (WIN32)
   set(fn "VstPlugins")
   if (PROCESSOR_ARCH STREQUAL "Win32")
-    set(_paths "$ENV{ProgramFiles(x86)}/${fn}" "$ENV{ProgramFiles(x86)}/Steinberg/${fn}")
+    set(_paths "$ENV{ProgramFiles\(x86\)}/${fn}" "$ENV{ProgramFiles\(x86\)}/Steinberg/${fn}")
   endif()
   # Append this for x86, x64, and ARM I guess
   list(APPEND _paths "'$ENV{ProgramFiles}/${fn}'" "'$ENV{ProgramFiles}/Steinberg/${fn}'")

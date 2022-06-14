@@ -6,7 +6,6 @@
 # Folders to process
 DIRS=(
 ./../IPlug
-./../IGraphics
 ./../Examples
 ./../Tests
 )

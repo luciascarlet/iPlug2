@@ -2,23 +2,34 @@
 
 #include "IPlug_include_in_plug_hdr.h"
 
-const int kNumPresets = 1;
+const int presetCount = 1;
 
-enum EParams
+enum class Parameters: int
 {
-  kGain = 0,
-  kNumParams
+  Gain = 0,
+  Count
 };
 
 using namespace iplug;
-using namespace igraphics;
 
-class IPlugEffect final : public Plugin
+class IPlugEffect final: public Plugin
 {
 public:
   IPlugEffect(const InstanceInfo& info);
-
-#if IPLUG_DSP // http://bit.ly/2S64BDd
+  
   void ProcessBlock(sample** inputs, sample** outputs, int nFrames) override;
-#endif
+  
+  /**
+   * Takes and returns a pointer to a platform-native window handle; normally this will just be an empty window.
+   * Add platform-specific code here to attach a GUI, casting the void pointer to a platform view/window pointer.
+   *
+   * @param parent - Void pointer to a platform-native window handle (NSView on macOS, HWND on Windows)
+   * @return The handle to the initialised window
+   */
+  void* OpenWindow(void* parent) override;
+  
+  /**
+   * Perform any necessary cleanup when the window is closed.
+   */
+  void CloseWindow() override;
 };
