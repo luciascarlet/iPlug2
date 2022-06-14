@@ -48,3 +48,6 @@ Examples/IPlugConvoEngine/r8brain
 #.vscode/launch.json
 */*/.vscode/launch.json
 Examples/Build
+/cmake-build-debug/
+/.idea/
+/Examples/IPlugEffect/.idea/
