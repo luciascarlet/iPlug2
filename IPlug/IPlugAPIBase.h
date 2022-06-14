@@ -96,18 +96,6 @@ public:
    * @return \c true if you specified a custom textual description for this note */
   virtual bool GetMidiNoteText(int noteNumber, char* str) const { *str = '\0'; return false; }
 
-  /** You need to implement this method if you are not using IGraphics and you want to support AAX's view interface functionality
-   * (special shortcuts to add automation for a parameter etc.)
-   * @return pointer to the class that implements the IAAXViewInterface */
-  virtual void* GetAAXViewInterface()
-  {
-#ifndef NO_IGRAPHICS
-    return (void*) GetUI();
-#else
-    return nullptr;
-#endif
-  }
-
   /** Override this method to get an "idle"" call on the main thread */
   virtual void OnIdle() {}
     
