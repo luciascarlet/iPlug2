@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 cmake_policy(SET CMP0091 NEW)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 #########
 # This is a build file for iPlug2 on Linux.
@@ -26,8 +29,6 @@ set(SRC_FILES
 )
 source_group(TREE ${dir} FILES ${SRC_FILES})
 
-
-
 # While not required, creating a base interface for includes and settings seems like a good idea.
 add_library(_base INTERFACE)
 # iplug_target_add() is a shorthand function for adding sources and include dirs,
@@ -36,12 +37,12 @@ iplug_target_add(_base INTERFACE
   INCLUDE ${dir} ${dir}/resources
   LINK iPlug2_Synth)
 
-# For whatever reason setting CXX_STANDARD doesn't seem to work properly, so set it explicitly.
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  target_compile_options(_base INTERFACE "$<$<COMPILE_LANGUAGE:CXX>:/std:c++20>")
-else()
-  target_compile_options(_base INTERFACE "$<$<COMPILE_LANGUAGE:CXX>:-std=c++20>")
-endif()
+### For whatever reason setting CXX_STANDARD doesn't seem to work properly, so set it explicitly.
+#if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+#  target_compile_options(_base INTERFACE "-std:c++20")
+#else()
+#  target_compile_options(_base INTERFACE "-std=c++20")
+#endif()
 
 # For typing convenience the target name is put into a variable.
 set(tgt ${CMAKE_PROJECT_NAME}-app)

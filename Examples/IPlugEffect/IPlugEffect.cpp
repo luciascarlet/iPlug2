@@ -9,7 +9,7 @@ IPlugEffect::IPlugEffect(const InstanceInfo& info)
 
 void IPlugEffect::ProcessBlock(sample** inputs, sample** outputs, int frameCount)
 {
-  const double gain = static_cast<int>(Parameters::Gain)->Value() / 100.;
+  const double gain = GetParam(static_cast<int>(Parameters::Gain))->Value() / 100.;
   const int channelCount = NOutChansConnected();
   
   for (int s = 0; s < frameCount; s++)
@@ -23,7 +23,7 @@ void IPlugEffect::ProcessBlock(sample** inputs, sample** outputs, int frameCount
 
 void* IPlugEffect::OpenWindow(void* parent)
 {
-
+	return nullptr;
 }
 
 void IPlugEffect::CloseWindow()

@@ -6,7 +6,7 @@
 #
 #  ==============================================================================
 
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.22)
 cmake_policy(SET CMP0076 NEW)
 
 set(iPlug2_FOUND 1)
@@ -373,7 +373,6 @@ iplug_source_tree(iPlug2_Synth)
 #! iplug_configure_target : Configure a target for the given output type
 #
 function(iplug_configure_target target target_type)
-  set_property(TARGET ${target} PROPERTY CXX_STANDARD ${IPLUG2_CXX_STANDARD})
 
   # ALL Configurations
   if (WIN32)
